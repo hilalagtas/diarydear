@@ -1,0 +1,12 @@
+{
+  "name": "diarydear",
+  "version": "1.0.0",
+  "description": "diary project",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hilal melisa",
+  "license": "ISC"
+}
