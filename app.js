@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import conn from './db.js';  
 import userRoutes from './routes/userRoutes.js';  // Kullanıcı rotaları
+import friendsRoutes from './routes/friendsRoutes.js';  
 
 dotenv.config();
 
@@ -18,9 +19,12 @@ app.use(bodyParser.json());
 // Kullanıcı rotalarını '/users' ile kullanma
 app.use('/users', userRoutes);
 
+// Arkadaş rotalarını '/friends' ile kullanma
+app.use('/friends', friendsRoutes);
+
 // Ana sayfa (GET /) route'u
 app.get('/', (req, res) => {
-    res.send('Hoşgeldiniz! Kayıt için /users/register endpoint\'ini kullanabilirsiniz.');
+    res.send('Hoşgeldiniz! Kayıt için /users/register, arkadaş eklemek için /friends/add endpoint\'ini kullanabilirsiniz.');
 });
 
 // POST isteği ile kullanıcı kaydı yapılacak
