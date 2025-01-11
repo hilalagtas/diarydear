@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import conn from './db.js';  
 import userRoutes from './routes/userRoutes.js';  // Kullanıcı rotaları
 import friendsRoutes from './routes/friendsRoutes.js';  
+import messagingRoutes from './routes/messagingRoutes.js';
+import rolesRoutes from './routes/rolesRoutes.js';
+
 
 dotenv.config();
 
@@ -21,6 +24,12 @@ app.use('/users', userRoutes);
 
 // Arkadaş rotalarını '/friends' ile kullanma
 app.use('/friends', friendsRoutes);
+
+// Arkadaş rotalarını '/messaging' ile kullanma
+app.use('/messaging', messagingRoutes);
+
+// rol rotalarını '/roles' ile kullanma
+app.use('/roles', messagingRoutes);
 
 // Ana sayfa (GET /) route'u
 app.get('/', (req, res) => {
