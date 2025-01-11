@@ -9,6 +9,27 @@ dotenv.config();
 // Veritabanı bağlantısı
 conn();
 
+import User from './models/userModel.js';
+
+
+const user = new User({
+    username: 'jon_doe',
+    email: 'john.dssoe@example.com',
+    password: '1234ss56',
+    birthDate: new Date('1995-06-15'),
+    maritalStatus: 'Single',
+    gender: 'Male',
+    roles: ['User'],
+});
+
+user.save()
+    .then(savedUser => {
+        console.log('User saved:', savedUser);
+    })
+    .catch(err => {
+        console.error('Error saving user:', err);
+    });
+
 
 
 const app = express();

@@ -2,8 +2,8 @@
 import mongoose from 'mongoose';
 
 const conn = () => {
-  mongoose.connect(process.env.DB_URI, {
-    dbName: 'diarydear',
+  mongoose.connect(process.env.MONGODB_URI, {
+   // dbName: 'diarydear',
    // useNewUrlParser: true,
    // useUnifiedTopology: true,
   })
