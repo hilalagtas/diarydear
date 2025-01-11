@@ -44,9 +44,18 @@ const updateUser = async (id, updateData) => {
     return updatedUser;
 };
 
+// Kullanıcı Arama Servisi (Kullanıcı adına göre arama)
+const searchUsersByUsername = async (username) => {
+    const users = await User.find({
+        username: { $regex: `${username}`, $options: 'i' }  // 'i' case insensitive
+    });
+    return users;
+};
+
 // Tüm fonksiyonları tek bir nesne olarak dışa aktar
 export default {
     registerUser,
     loginUser,
-    updateUser
+    updateUser,
+    searchUsersByUsername
 };

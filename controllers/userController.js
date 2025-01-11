@@ -32,5 +32,20 @@ const updateUser = async (req, res) => {
     }
 };
 
+// Kullanıcı Arama (Kullanıcı adına göre arama)
+const searchUsers = async (req, res) => {
+    try {
+        const { username } = req.query;  // URL'den query parametre olarak kullanıcı adı al
+        if (!username) {
+            return res.status(400).json({ error: 'Username parameter is required.' });
+        }
+
+        const users = await userService.searchUsersByUsername(username);
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 // Fonksiyonları dışa aktarıyoruz
-export default { registerUser, loginUser, updateUser };
+export default { registerUser, loginUser, updateUser, searchUsers };

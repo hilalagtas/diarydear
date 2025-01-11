@@ -11,4 +11,6 @@ router.post('/login', userController.loginUser);
 // Kullanıcı Güncelleme Endpoint'i (PUT)
 router.put('/update/:id', userController.updateUser);
 
+router.get('/search', userController.searchUsers);
+
 export default router;
