@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js';  // Kullanıcı rotaları
 import friendsRoutes from './routes/friendsRoutes.js';  
 import messagingRoutes from './routes/messagingRoutes.js';
 import rolesRoutes from './routes/rolesRoutes.js';
+import journalRoutes from './routes/journalRoutes.js';
 
 
 dotenv.config();
@@ -29,7 +30,14 @@ app.use('/friends', friendsRoutes);
 app.use('/messaging', messagingRoutes);
 
 // rol rotalarını '/roles' ile kullanma
-app.use('/roles', messagingRoutes);
+app.use('/roles', rolesRoutes);
+
+// journal rotalarını '/journal' ile kullanma
+app.use('/journal', journalRoutes);
+
+
+
+
 
 // Ana sayfa (GET /) route'u
 app.get('/', (req, res) => {
