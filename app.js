@@ -1,36 +1,13 @@
-// app.js
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import conn from './db.js';  // Default export kullanıldığı için böyle import ediyorsunuz
+import conn from './db.js';  
+import userRoutes from './routes/userRoutes.js';  // Kullanıcı rotaları
 
 dotenv.config();
 
 // Veritabanı bağlantısı
 conn();
-
-import User from './models/userModel.js';
-
-
-const user = new User({
-    username: 'jon_doe',
-    email: 'john.dssoe@example.com',
-    password: '1234ss56',
-    birthDate: new Date('1995-06-15'),
-    maritalStatus: 'Single',
-    gender: 'Male',
-    roles: ['User'],
-});
-
-user.save()
-    .then(savedUser => {
-        console.log('User saved:', savedUser);
-    })
-    .catch(err => {
-        console.error('Error saving user:', err);
-    });
-
-
 
 const app = express();
 const port = 3000;
@@ -38,27 +15,17 @@ const port = 3000;
 // Middleware, JSON verilerini işlemek için
 app.use(bodyParser.json());
 
+// Kullanıcı rotalarını '/users' ile kullanma
+app.use('/users', userRoutes);
+
 // Ana sayfa (GET /) route'u
 app.get('/', (req, res) => {
-    res.send('Hoşgeldiniz! Kayıt için /register endpoint\'ini kullanabilirsiniz.');
+    res.send('Hoşgeldiniz! Kayıt için /users/register endpoint\'ini kullanabilirsiniz.');
 });
 
-// Kayıt olma (register) endpoint'i
-app.post('/register', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-        return res.status(400).json({ message: "Username and password are required!" });
-    }
-
-    // Burada veritabanına kaydetme işlemi yapılabilir
-    res.status(201).json({
-        message: 'User registered successfully!',
-        user: {
-            username,
-            password, // Gerçek projede şifreyi asla düz metin olarak kaydetmeyin!
-        }
-    });
+// POST isteği ile kullanıcı kaydı yapılacak
+app.post('/hilal', (req, res) => {
+    res.send('POST isteği gönderildi! Kayıt işlemi burada yapılabilir.');
 });
 
 // Sunucuyu başlatma

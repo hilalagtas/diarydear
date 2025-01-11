@@ -1,33 +1,36 @@
-const userService = require('../services/userService');
+import userService from '../services/userService.js';
 
 // Kullanıcı Kaydı
-exports.registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
     try {
         const user = await userService.registerUser(req.body);
-        res.status(201).json({ message: 'User registered successfully.', user });
+        return res.status(201).json({ message: 'User registered successfully.', user });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
 
 // Kullanıcı Girişi
-exports.loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         const { user, token } = await userService.loginUser(email, password);
-        res.json({ message: 'Login successful.', user, token });
+        return res.json({ message: 'Login successful.', user, token });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
 
 // Kullanıcı Bilgilerini Güncelleme
-exports.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const updatedUser = await userService.updateUser(id, req.body);
-        res.json({ message: 'User updated successfully.', updatedUser });
+        return res.json({ message: 'User updated successfully.', updatedUser });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
+
+// Fonksiyonları dışa aktarıyoruz
+export default { registerUser, loginUser, updateUser };
