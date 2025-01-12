@@ -1,5 +1,4 @@
 import User from '../models/userModel.js';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // Kullanıcı Kaydı Servisi
@@ -9,6 +8,7 @@ const registerUser = async (userData) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) throw new Error('Email already in use.');
 
+    // Password hash işlemini kaldırdım, basit kontrol yapıyorum
     const user = new User({
         username,
         email,
@@ -23,15 +23,13 @@ const registerUser = async (userData) => {
     return user;
 };
 
-
-
 // Kullanıcı Girişi Servisi
 const loginUser = async (email, password) => {
     const user = await User.findOne({ email });
     if (!user) throw new Error('User not found.');
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) throw new Error('Invalid credentials.');
+    // Basit kontrol yerine metin doğrulama
+    if (password !== user.password) throw new Error('Invalid credentials.');
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     return { user, token };

@@ -7,6 +7,8 @@ import friendsRoutes from './routes/friendsRoutes.js';
 import messagingRoutes from './routes/messagingRoutes.js';
 import rolesRoutes from './routes/rolesRoutes.js';
 import journalRoutes from './routes/journalRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+
 
 
 dotenv.config();
@@ -35,6 +37,8 @@ app.use('/roles', rolesRoutes);
 // journal rotalarını '/journal' ile kullanma
 app.use('/journal', journalRoutes);
 
+// blog rotalarını '/blog' ile kullanma
+app.use('/blog', blogRoutes);
 
 
 

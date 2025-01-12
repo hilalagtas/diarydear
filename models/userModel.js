@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 // Kullanıcı Şeması
 const userSchema = new mongoose.Schema({
@@ -47,23 +46,6 @@ const userSchema = new mongoose.Schema({
         },
     },
 }, { timestamps: true });
-
-// Şifre Hashleme Middleware
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next(); // Şifre değişmediyse hashleme
-    try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
-        next();
-    } catch (err) {
-        next(err);
-    }
-});
-
-// Şifre Doğrulama Metodu
-userSchema.methods.comparePassword = async function (candidatePassword) {
-    return await bcrypt.compare(candidatePassword, this.password);
-};
 
 // Kullanıcı Modeli
 const User = mongoose.model('User', userSchema);
