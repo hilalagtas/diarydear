@@ -1,5 +1,5 @@
 # Node.js'un resmi imajını kullan
-FROM node:18
+FROM node:20
 
 # Konteyner içinde çalışma dizinini ayarla
 WORKDIR /app
